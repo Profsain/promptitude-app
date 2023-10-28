@@ -1,5 +1,5 @@
-import "@styles/global.css";
-import { Children } from "react";
+import "@styles/globals.css";
+
 
 export const metadata = {
   title: "💖Promptitude",
@@ -7,7 +7,7 @@ export const metadata = {
     "Discover and share the best of the web AI prompt, curated by Promptitude.",
 };
 
-const RootLayout = () => {
+const RootLayout = ({children}) => {
   return (
     <html lang="en">
       <body>
@@ -16,7 +16,7 @@ const RootLayout = () => {
         </div>
 
         <main className="app">
-          {Children}
+          {children}
         </main>
       </body>
     </html>
