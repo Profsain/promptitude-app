@@ -16,10 +16,12 @@ export const connectToDB = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
+
         isConnected = true;
+
         console.log("=> MongoDB connection established successfully");
     } catch (error) {
         console.log("=> Could not connect to MongoDB");
-        console.log(error);
+        console.log(error.message);
     }
 }

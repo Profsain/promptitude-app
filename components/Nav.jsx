@@ -2,10 +2,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { signIn, signOut, useSession, getProviders } from "next-auth";
+import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const Nav = () => {
-  const isUserLoggedIn = true; // TODO: replace with useSession() hook
+  const { data: session } = useSession();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -13,8 +13,11 @@ const Nav = () => {
 
   useEffect(() => {
     const getProvidersData = async () => {
-      (async () => setProviders(await getProviders()))();
+      const providersData = await getProviders();
+      setProviders(providersData);
     };
+
+    getProvidersData();
   }, []);
 
   return (
@@ -31,7 +34,7 @@ const Nav = () => {
 
       {/* Desktop menu */}
       <div className="sm:flex hidden">
-        {isUserLoggedIn ? (
+        {session?.user ? (
           <div className="flex gap-3 md:gap-5">
             <Link href="/create-prompt" className="black_btn">
               Create Post
@@ -43,7 +46,7 @@ const Nav = () => {
 
             <Link href="/profile">
               <Image
-                src="/assets/images/logo.svg"
+                src={session?.user?.image}
                 alt="Profile"
                 width={37}
                 height={37}
@@ -59,7 +62,7 @@ const Nav = () => {
                   type="button"
                   key={provider.name}
                   onClick={() => signIn(provider.id)}
-                  className="black_btn"
+                  className="outline_btn"
                 >
                   Sign in with {provider.name}
                 </button>
@@ -70,10 +73,10 @@ const Nav = () => {
 
       {/* Mobile menu */}
       <div className="sm:hidden flex relative">
-        {isUserLoggedIn ? (
+        {session?.user ? (
           <div className="flex">
             <Image
-              src="/assets/images/logo.svg"
+              src={session?.user?.image}
               alt="Profile"
               width={37}
               height={37}
@@ -118,7 +121,7 @@ const Nav = () => {
                   type="button"
                   key={provider.name}
                   onClick={() => signIn(provider.id)}
-                  className="black_btn"
+                  className="outline_btn"
                 >
                   Sign in with {provider.name}
                 </button>
