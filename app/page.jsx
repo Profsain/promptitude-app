@@ -12,7 +12,7 @@ const Home = () => {
           </h1>
 
           <p className="desc text-center">
-              Promptitude is an open-source project that aims to help people discover, create and share the best of the web AI prompt, curated by Promptitude.
+              PromptPedia is an open-source project that aims to help people discover, create and share the best of the web AI prompt, curated by PromptPedia.
           </p>
 
           {/* Feed component goes here */}

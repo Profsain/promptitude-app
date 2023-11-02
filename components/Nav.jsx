@@ -29,7 +29,7 @@ const Nav = () => {
           width={32}
           height={32}
         />
-        <p className="logo_text">Promptitude</p>
+        <p className="logo_text">PromptPedia</p>
       </Link>
 
       {/* Desktop menu */}
